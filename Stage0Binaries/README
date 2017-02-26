@@ -1,0 +1,3 @@
+This directory contains the necessary stage 0 loader binaries, separated by architecture.  Dropping one of these binaries on a target and running it will cause it to bind to the specified TCP port, receive a block of binary, and jmp to it - executing it as raw instructions.  After the code exits, the listener will die.  You may wish to run it in a loop.
+
+Running make will build any missing binaries, if you've got metasploit framework installed.  You may need to modify MSFVENOM in the Makefile.
