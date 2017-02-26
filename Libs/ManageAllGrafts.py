@@ -3,6 +3,7 @@ from Queue import Queue
 import threading
 
 import Architectures
+import Logclass as LC
 from ManageSysgraft import ManageSysgraft
 
 class CommandAndResponse(object):
@@ -116,3 +117,9 @@ class ManageAllGrafts(object):
         with self.graft_list_lock:
             return list(self.graft_list[index][1])
 
+    def close(self):
+        """
+        Delete all grafts, closing all
+        """
+        while self.graft_list:
+            self.del_graft(self.graft_list.iterkeys().next())

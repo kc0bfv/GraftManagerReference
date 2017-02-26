@@ -2,6 +2,8 @@
 
 from __future__ import print_function
 
+import logging
+
 from Libs.ManageAllGrafts import ManageAllGrafts
 
 def display_menu(header, menu_list):
@@ -87,7 +89,7 @@ def select_graft(manager, menu_title):
     """
     graft_list = manager.list_grafts()
 
-    graft_menu = [("{}: {} port {}".format(index, addr, port), index) 
+    graft_menu = [("{} port {}".format(addr, port), index) 
             for index, addr, port in graft_list]
     graft_menu.append(("Back", None))
 
@@ -119,6 +121,7 @@ def show_command_responses(manager):
         print("{}: {}".format(c_and_r.command, c_and_r.response))
 
 def shutdown(manager):
+    manager.close()
     quit(0)
 
 def mainloop():
@@ -137,4 +140,7 @@ def mainloop():
         selected_action(manager)
 
 if __name__ == "__main__":
+    logging.basicConfig(filename="Logs/cli_log",
+            format="%(asctime)s %(message)s", level=logging.INFO)
+
     mainloop()
